@@ -6,26 +6,28 @@ const rl = readline.createInterface({
 });
 
 function studentGradeGenerator() {
- 
-        rl.question("Please input your mark ", (mark) => {
+    rl.question("Please input your mark ", (mark) => {
+    
+        if (isNaN(mark) || mark < 0 || mark > 100) {
+            console.log("Invalid mark. Try Again!");
+            studentGradeGenerator();
+        } else {
             mark = Number(mark);
-    
-            if (isNaN(mark) || mark < 0 || mark > 100) {
-                rl.question("Please enter a mark between 0 and 100? ", (mark1) => {
-                    mark1 = Number(mark1);
-    
-                    if (mark1 > 79) {
-                       return("You have an A")
-                    } else if (mark1 >= 60 && mark1 <= 79) {
-                        return("You have a B")
-                    } else if (mark1 > 49 && mark1 < 60) {
-                        return("You have a C")
-                    } else if (mark1 >= 40 && mark1 <= 49) {
-                       return("You have a D")
-                    } else {
-                        return("You have an E")
-                    }
-                    rl.close();
-                })
+
+            if (mark > 79) {
+                console.log("You have an A")
+            } else if (mark >= 60 && mark <= 79) {
+                console.log("You have a B")
+            } else if (mark > 49 && mark < 60) {
+                console.log("You have a C")
+            } else if (mark >= 40 && mark <= 49) {
+                console.log("You have a D")
+            } else {
+                console.log("You have an E")
             }
-            studentGradeGenerator()
+            rl.close();
+        }
+    })
+}
+
+studentGradeGenerator();
